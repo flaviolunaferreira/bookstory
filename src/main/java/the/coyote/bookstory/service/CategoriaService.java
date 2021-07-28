@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import the.coyote.bookstory.domain.Categoria;
+import the.coyote.bookstory.dto.CategoriaForm;
 import the.coyote.bookstory.exceptions.ObjectNotFoundException;
 import the.coyote.bookstory.repositories.CategoriaRepository;
 
@@ -24,5 +25,10 @@ public class CategoriaService {
 
 	public List<Categoria> findAll() {
 		return repository.findAll();
+	}
+
+	public Categoria create(CategoriaForm form) {
+		Categoria categoria = form.newCategoria();
+		return repository.save(categoria);
 	}
 }

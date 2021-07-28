@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -23,17 +24,21 @@ public class Categoria implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 		
-	@Column
+	@Size(max = 50, min = 2)
+	@Column(unique = true)
 	private String nome;
 	
-	@Column
+	@Size(max = 200)
 	private String descricao;
 	
 	@OneToMany(mappedBy = "categoria")
 	private List<Livro> livros = new ArrayList<Livro>();
 	
-	public Categoria() {
-		super();
+	public Categoria() {};
+	
+	public Categoria(String nome, String descricao) {
+		this.nome = nome;
+		this.descricao = descricao;
 	}
 	
 	
