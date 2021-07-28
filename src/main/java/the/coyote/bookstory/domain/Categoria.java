@@ -30,19 +30,18 @@ public class Categoria implements Serializable{
 	private String categoria;
 	
 	@OneToMany(mappedBy = "categoria")
-	private List<Livro> livros = new ArrayList<>();
+	private List<Livro> livros = new ArrayList<Livro>();
 	
 	public Categoria() {
 		super();
 	}
-
+	
+	
 	public Categoria(Integer id, String nome, String categoria) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.categoria = categoria;
 	}
-	
-	
-	
+
 }
