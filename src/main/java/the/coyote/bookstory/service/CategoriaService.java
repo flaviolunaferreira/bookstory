@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import the.coyote.bookstory.domain.Categoria;
 import the.coyote.bookstory.dto.CategoriaForm;
+import the.coyote.bookstory.exceptions.IntegratyViolationException;
 import the.coyote.bookstory.exceptions.ObjectNotFoundException;
 import the.coyote.bookstory.repositories.CategoriaRepository;
 
@@ -41,6 +43,10 @@ public class CategoriaService {
 
 	public void delete(Integer id) {
 		Categoria result = findById(id);
-		repository.delete(result);				
+		try {
+			repository.delete(result);							
+		} catch (DataIntegrityViolationException e) {
+			throw new IntegratyViolationException("Categoria não pode ser DELETADA! Possui livros associados!");
+		}
 	}
 }

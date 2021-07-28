@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import the.coyote.bookstory.exceptions.IntegratyViolationException;
 import the.coyote.bookstory.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
@@ -20,6 +21,16 @@ public class ResourceExceptionHandle {
 				e.getMessage()
 		);
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+	}
+	
+	@ExceptionHandler(IntegratyViolationException.class)
+	public ResponseEntity<StandardError> integratyViolationException(IntegratyViolationException e, ServletRequest request) {
+		StandardError error = new StandardError(
+				System.currentTimeMillis(),
+				HttpStatus.BAD_REQUEST.value(),
+				e.getMessage()
+		);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(error);
 	}
 	
 }
