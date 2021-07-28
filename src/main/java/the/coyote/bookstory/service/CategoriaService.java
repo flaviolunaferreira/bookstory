@@ -31,4 +31,16 @@ public class CategoriaService {
 		Categoria categoria = form.newCategoria();
 		return repository.save(categoria);
 	}
+
+	public Categoria update(Integer id, CategoriaForm form) {
+		Categoria result = findById(id);
+		result.setNome(form.getNome());
+		result.setDescricao(form.getDescricao());
+		return repository.save(result);
+	}
+
+	public void delete(Integer id) {
+		Categoria result = findById(id);
+		repository.delete(result);				
+	}
 }
