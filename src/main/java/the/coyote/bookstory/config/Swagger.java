@@ -18,7 +18,7 @@ public class Swagger {
 
 	@Bean
 	public Docket api() {
-		Predicate<RequestHandler> basePackage = RequestHandlerSelectors.basePackage("the.coyote.cdc");
+		Predicate<RequestHandler> basePackage = RequestHandlerSelectors.basePackage("the.coyote.bookstory");
 		Predicate<String> apiUrls = PathSelectors.ant("/api/**");
 		return new Docket(DocumentationType.SWAGGER_2).select().apis(basePackage)
 				.paths(apiUrls).build();

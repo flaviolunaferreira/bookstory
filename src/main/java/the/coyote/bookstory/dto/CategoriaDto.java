@@ -1,21 +1,21 @@
-package the.coyote.bookstory.domain;
+package the.coyote.bookstory.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
+import the.coyote.bookstory.domain.Categoria;
+import the.coyote.bookstory.domain.Livro;
 
 @Data
-@Entity
-public class Categoria implements Serializable{
+public class CategoriaDto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,16 +32,10 @@ public class Categoria implements Serializable{
 	@OneToMany(mappedBy = "categoria")
 	private List<Livro> livros = new ArrayList<Livro>();
 	
-	public Categoria() {
-		super();
+	public CategoriaDto(Categoria categoria) {
+		this.id = categoria.getId();
+		this.nome = categoria.getNome();
+		this.descricao = categoria.getDescricao();
 	}
 	
-	
-	public Categoria(Integer id, String nome, String descricao) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.descricao = descricao;
-	}
-
 }
