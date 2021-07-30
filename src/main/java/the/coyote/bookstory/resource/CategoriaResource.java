@@ -43,7 +43,8 @@ public class CategoriaResource {
 		List<Categoria> lista = service.findAll();
 		List<CategoriaDto> listaDto = lista
 				.stream()
-				.map(item -> new CategoriaDto(item)).collect(Collectors.toList());
+				.map(item -> new CategoriaDto(item))
+				.collect(Collectors.toList());
 		return ResponseEntity.ok().body(listaDto);
 	}
 
